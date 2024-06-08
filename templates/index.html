@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Diary</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 0;
+            color: gray;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .grid-item {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            height: 200px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the grid items */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            /*background: rgba(0, 0, 0, 0.5);*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .text-content {
+            background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent background color to the text */
+            padding: 10px; /* Add padding to the text */
+            border-radius: 5px; /* Add border radius for better aesthetics */
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PLANT FRIEND DIARY</h1>
+        <h2>HOME</h2>
+        <div class="grid-container">
+            {% for page_id, page_data in data_dict.items() %}
+                <div class="grid-item" style='background-image: url("{{ url_for('static', filename='images/' + page_data['image']) }}");'>
+                    <a href="/page/{{ page_id }}" class="text-content">{{ page_data["title"] }}</a>
+                </div>
+            {% endfor %}
+        </div>
+        <footer>
+            <p>&copy; 2024 Plant Friend</p>
+        </footer>
+    </div>
+</body>
+</html>

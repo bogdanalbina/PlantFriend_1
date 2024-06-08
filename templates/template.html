@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary {{ number }}</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the container */
+            background: white; /* Ensure the container has a white background */
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 0;
+            color: gray;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 1em;
+            color: gray;
+        }
+        
+        
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4CAF50; /* Green background */
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Popping out drop shadow */
+            transition: transform 0.3s ease-in-out;
+        }
+        button:hover::after {
+            transform: translate(-50%, -50%) scale(2);
+        }
+        button:hover {
+            transform: translateY(-3px); /* Move button upwards on hover */
+        }
+        
+    </style>
+</head>
+<body>
+    <h1> {{ title }}</h1>
+    <h2><a href="/">Back to DIARY</a></h2>
+    <div class="container">
+        <button type="button" onclick="printPage()">Print Page</button>
+        {% for para in text %}
+        <p style="text-align: left">{{para}}</p>
+        {% endfor %}
+   
+        <img src="{{ url_for('static', filename='images/' + image) }}" alt="Image for Webpage {{ number }}">
+        <footer>
+            <p>&copy; 2024 Plant Friend</p>
+        </footer>
+    </div>
+    <script>
+        function printPage() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
